@@ -3,22 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Group;
-use App\Http\Controllers\UrlParam;
+use Illuminate\Support\Facades\Date;
+use Knuckles\Scribe\Attributes\Group;
 
-#[Group("Server status", "See the status of the server")]
 class StatusController extends Controller
 {
-    #[Group("Get server status")]
-    #[UrlParam("id", "integer", "The ID of the post.")]
-    #[UrlParam("lang", "The language.", required: false, example: "en")]
+    #[Group("Status", "See the status of the API")]
     public function get()
     {
         return [
             'status' => 'up',
+            'time'   => Date::now(),
             'services' => [
-                'database' => 'up',
-                'redis' => 'up',
+                'database' => 'up'
             ],
         ];
     }

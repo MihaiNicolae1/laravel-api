@@ -13,5 +13,7 @@ Route::controller(StatusController::class)->group(function () {
 
 Route::controller(CompanyController::class)->group(function () {
     Route::get('/company/{id}', 'get');
-    Route::post('/company', 'store');
+    Route::post('/company', 'post');
+    Route::patch('/company/{id}', 'patch');
+    Route::delete('/company/{id}', 'delete');
 });
