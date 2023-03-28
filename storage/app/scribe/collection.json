@@ -1,0 +1,608 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "virta-api",
+        "_postman_id": "ded4b0c7-45fa-4166-952b-b8d658723523",
+        "description": "An API for EV charging managing",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Company",
+            "description": "Perform CRUD operations for company",
+            "item": [
+                {
+                    "name": "Get company info",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you get a company info.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": {\n\"id\": 6,\n\"parent_company_id\": null,\n\"name\": \"VirtaLTD\",\n\"created_at\": \"2023-03-27T12:15:47.000000Z\",\n\"updated_at\": \"2023-03-27T12:15:47.000000Z\"\n},\n\"meta\": []\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Resource not found\"}",
+                            "name": "company not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a new company",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"VirtaLTD\",\"parent_company_id\":1}"
+                        },
+                        "description": "This endpoint lets you create a new company.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 201,\n\"message\": \"Entity successfully created.\",\n\"data\": {\n\"name\": \"123Test\",\n\"parent_company_id\": 22,\n\"updated_at\": \"2023-03-28T07:50:49.000000Z\",\n\"created_at\": \"2023-03-28T07:50:49.000000Z\",\n\"id\": 27\n},\n\"meta\": []\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update an existing company",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aut",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"VirtaUpdated\",\"parent_company_id\":\"1\"}"
+                        },
+                        "description": "This endpoint lets you update a company.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully created.\",\n\"data\": {\n\"name\": \"123Test\",\n\"parent_company_id\": 22,\n\"updated_at\": \"2023-03-28T07:50:49.000000Z\",\n\"created_at\": \"2023-03-28T07:50:49.000000Z\",\n\"id\": 1\n},\n\"meta\": []\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\"message\": \"Entity not updated successfully.\"}",
+                            "name": "company not found"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Parent company could not be set.\"}",
+                            "name": "parent company not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete an existing company",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the company to be deleted."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you delete an existing company.\nDeleting a parent company will also delete all it's children and assigned stations.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully deleted.\",\n\"data\": [],\n\"meta\": []\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Resource not found.\"}",
+                            "name": "company not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get company stations count",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company\/:id\/stations\/count",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company\/:id\/stations\/count",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "20",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you count the stations of a company.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": {\n\"stations_count\": 2\n},\n\"meta\": []\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Resource not found.\"}",
+                            "name": "company not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get company stations list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/company\/:id\/stations\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/company\/:id\/stations\/list",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "20",
+                                    "description": "The ID of the company."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you get a list with stations of the company.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": [\n{\n\"id\": 20,\n\"parent_company_id\": 6,\n\"name\": \"123Test\",\n\"created_at\": \"2023-03-28 06:50:27\",\n\"updated_at\": \"2023-03-28 06:50:27\"\n},\n{\n\"id\": 23,\n\"parent_company_id\": 20,\n\"name\": \"123Test\",\n\"created_at\": \"2023-03-28 06:50:36\",\n\"updated_at\": \"2023-03-28 06:50:36\"\n}\n],\n\"meta\": []",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Resource not found.\"}",
+                            "name": "company not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Station",
+            "description": "Perform CRUD operations for station",
+            "item": [
+                {
+                    "name": "Get station info",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/station\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/station\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "9",
+                                    "description": "The ID of the station."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you get a station info.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": {\n\"id\": 20,\n\"name\": \"VirtaLTD\",\n\"latitude\": 45.123213,\n\"longitude\": 14.12311,\n\"company_id\": 20,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-28T06:50:59.000000Z\",\n\"updated_at\": \"2023-03-28T06:50:59.000000Z\"\n},\n\"meta\": []\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Resource not found\"}",
+                            "name": "station not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a new station",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/station",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/station"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"ChargingSpot1\",\"latitude\":\"+45.01231\",\"longitude\":\"-121.113122\",\"company_id\":1,\"address\":\"St.1, Helsinki, Finland\"}"
+                        },
+                        "description": "This endpoint lets you create a new station.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "scenario success={\n\"status\": \"success\",\n\"status_code\": 201,\n\"message\": \"Entity successfully created.\",\n\"data\": {\n\"name\": \"VirtaLTD\",\n\"latitude\": \"45.123213\",\n\"longitude\": \"14.000\",\n\"company_id\": 25,\n\"address\": \"Helsinki,Finland\",\n\"updated_at\": \"2023-03-28T09:50:22.000000Z\",\n\"created_at\": \"2023-03-28T09:50:22.000000Z\",\n\"id\": 29\n},\n\"meta\": []\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"message\": \"Company not found\"}",
+                            "name": "company not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update existing station",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/station\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/station\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "atque",
+                                    "description": "The ID of the station."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"ChargingSpot1\",\"latitude\":\"+45.01231\",\"longitude\":\"-121.113122\",\"company_id\":1,\"address\":\"St.1, Helsinki, Finland\"}"
+                        },
+                        "description": "This endpoint lets you update an existing station.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully updated.\",\n\"data\": 1,\n\"meta\": []\n}",
+                            "name": "success{"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete an existing station",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/station\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/station\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the station to be deleted."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint lets you delete an existing station.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully deleted.\",\n\"data\": 1,\n\"meta\": []\n}",
+                            "name": "success{"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get stations within radius",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stations\/radius",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stations\/radius"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"radius_km\":50,\"latitude\":\"+45.01231\",\"longitude\":\"-121.113122\"}"
+                        },
+                        "description": "This endpoint lets you get stations within a radius.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": {\n\"45.123213,14\": [\n{\n\"id\": 28,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14,\n\"company_id\": 25,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-28 09:09:13\",\n\"updated_at\": \"2023-03-28 09:09:13\",\n\"distance\": 13.700001346387596\n}\n],\n\"45.123213,14.12311\": [\n{\n\"id\": 7,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14.12311,\n\"company_id\": 6,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-27 12:25:12\",\n\"updated_at\": \"2023-03-27 12:25:12\",\n\"distance\": 16.76832087503264\n},\n{\n\"id\": 15,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14.12311,\n\"company_id\": 6,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-27 12:27:54\",\n\"updated_at\": \"2023-03-27 12:27:54\",\n\"distance\": 16.76832087503264\n}\n]",
+                            "name": "success{"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Status",
+            "description": "See the status of the API",
+            "item": [
+                {
+                    "name": "GET api\/v1\/status",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/status",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/status"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":\"success\",\"status_code\":200,\"message\":null,\"data\":{\"status\":\"up\",\"time\":\"2023-03-28T09:59:22.788349Z\",\"services\":{\"database\":\"up\"}},\"meta\":[]}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

@@ -11,12 +11,12 @@ class StatusController extends Controller
     #[Group("Status", "See the status of the API")]
     public function get()
     {
-        return [
+        return apiful([
             'status' => 'up',
             'time'   => Date::now(),
             'services' => [
                 'database' => 'up'
             ],
-        ];
+        ])->success();
     }
 }

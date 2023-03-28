@@ -1,0 +1,893 @@
+openapi: 3.0.3
+info:
+  title: virta-api
+  description: 'An API for EV charging managing'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  '/api/v1/company/{id}':
+    get:
+      summary: 'Get company info'
+      operationId: getCompanyInfo
+      description: 'This endpoint lets you get a company info.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: null
+                  data:
+                    id: 6
+                    parent_company_id: null
+                    name: VirtaLTD
+                    created_at: '2023-03-27T12:15:47.000000Z'
+                    updated_at: '2023-03-27T12:15:47.000000Z'
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: null
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 6
+                      parent_company_id:
+                        type: string
+                        example: null
+                      name:
+                        type: string
+                        example: VirtaLTD
+                      created_at:
+                        type: string
+                        example: '2023-03-27T12:15:47.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-03-27T12:15:47.000000Z'
+                  meta:
+                    type: array
+                    example: []
+        404:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Company
+      security: []
+    patch:
+      summary: 'Update an existing company'
+      operationId: updateAnExistingCompany
+      description: 'This endpoint lets you update a company.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: 'Entity successfully created.'
+                  data:
+                    name: 123Test
+                    parent_company_id: 22
+                    updated_at: '2023-03-28T07:50:49.000000Z'
+                    created_at: '2023-03-28T07:50:49.000000Z'
+                    id: 1
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Entity successfully created.'
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: 123Test
+                      parent_company_id:
+                        type: integer
+                        example: 22
+                      updated_at:
+                        type: string
+                        example: '2023-03-28T07:50:49.000000Z'
+                      created_at:
+                        type: string
+                        example: '2023-03-28T07:50:49.000000Z'
+                      id:
+                        type: integer
+                        example: 1
+                  meta:
+                    type: array
+                    example: []
+        400:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Entity not updated successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Entity not updated successfully.'
+        404:
+          description: 'parent company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Parent company could not be set.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Parent company could not be set.'
+      tags:
+        - Company
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the company.'
+                  example: VirtaUpdated
+                parent_company_id:
+                  type: The
+                  description: 'id of the parent company or "null".'
+                  example: '1'
+      security: []
+    delete:
+      summary: 'Delete an existing company'
+      operationId: deleteAnExistingCompany
+      description: "This endpoint lets you delete an existing company.\nDeleting a parent company will also delete all it's children and assigned stations."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: 'Entity successfully deleted.'
+                  data: []
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Entity successfully deleted.'
+                  data:
+                    type: array
+                    example: []
+                  meta:
+                    type: array
+                    example: []
+        404:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found.'
+      tags:
+        - Company
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/v1/company:
+    post:
+      summary: 'Create a new company'
+      operationId: createANewCompany
+      description: 'This endpoint lets you create a new company.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 201
+                  message: 'Entity successfully created.'
+                  data:
+                    name: 123Test
+                    parent_company_id: 22
+                    updated_at: '2023-03-28T07:50:49.000000Z'
+                    created_at: '2023-03-28T07:50:49.000000Z'
+                    id: 27
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: 'Entity successfully created.'
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: 123Test
+                      parent_company_id:
+                        type: integer
+                        example: 22
+                      updated_at:
+                        type: string
+                        example: '2023-03-28T07:50:49.000000Z'
+                      created_at:
+                        type: string
+                        example: '2023-03-28T07:50:49.000000Z'
+                      id:
+                        type: integer
+                        example: 27
+                  meta:
+                    type: array
+                    example: []
+      tags:
+        - Company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the company.'
+                  example: VirtaLTD
+                parent_company_id:
+                  type: integer
+                  description: 'The id of the parent company.If not provided, will be set to null.'
+                  example: 1
+              required:
+                - name
+      security: []
+  '/api/v1/company/{id}/stations/count':
+    get:
+      summary: 'Get company stations count'
+      operationId: getCompanyStationsCount
+      description: 'This endpoint lets you count the stations of a company.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: null
+                  data:
+                    stations_count: 2
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: null
+                  data:
+                    type: object
+                    properties:
+                      stations_count:
+                        type: integer
+                        example: 2
+                  meta:
+                    type: array
+                    example: []
+        404:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found.'
+      tags:
+        - Company
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: 20
+        required: true
+        schema:
+          type: integer
+  '/api/v1/company/{id}/stations/list':
+    get:
+      summary: 'Get company stations list'
+      operationId: getCompanyStationsList
+      description: 'This endpoint lets you get a list with stations of the company.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": [\n{\n\"id\": 20,\n\"parent_company_id\": 6,\n\"name\": \"123Test\",\n\"created_at\": \"2023-03-28 06:50:27\",\n\"updated_at\": \"2023-03-28 06:50:27\"\n},\n{\n\"id\": 23,\n\"parent_company_id\": 20,\n\"name\": \"123Test\",\n\"created_at\": \"2023-03-28 06:50:36\",\n\"updated_at\": \"2023-03-28 06:50:36\"\n}\n],\n\"meta\": []"
+        404:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found.'
+      tags:
+        - Company
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the company.'
+        example: 20
+        required: true
+        schema:
+          type: integer
+  '/api/v1/station/{id}':
+    get:
+      summary: 'Get station info'
+      operationId: getStationInfo
+      description: 'This endpoint lets you get a station info.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: null
+                  data:
+                    id: 20
+                    name: VirtaLTD
+                    latitude: 45.123213
+                    longitude: 14.12311
+                    company_id: 20
+                    address: TestAddress
+                    created_at: '2023-03-28T06:50:59.000000Z'
+                    updated_at: '2023-03-28T06:50:59.000000Z'
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: null
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 20
+                      name:
+                        type: string
+                        example: VirtaLTD
+                      latitude:
+                        type: number
+                        example: 45.123213
+                      longitude:
+                        type: number
+                        example: 14.12311
+                      company_id:
+                        type: integer
+                        example: 20
+                      address:
+                        type: string
+                        example: TestAddress
+                      created_at:
+                        type: string
+                        example: '2023-03-28T06:50:59.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-03-28T06:50:59.000000Z'
+                  meta:
+                    type: array
+                    example: []
+        404:
+          description: 'station not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Station
+      security: []
+    patch:
+      summary: 'Update existing station'
+      operationId: updateExistingStation
+      description: 'This endpoint lets you update an existing station.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'success{'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully updated.\",\n\"data\": 1,\n\"meta\": []\n}"
+      tags:
+        - Station
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the company.'
+                  example: ChargingSpot1
+                latitude:
+                  type: string
+                  description: 'The latitude of the location.'
+                  example: '+45.01231'
+                longitude:
+                  type: string
+                  description: 'The longitude of the location.'
+                  example: '-121.113122'
+                company_id:
+                  type: integer
+                  description: 'The id of the company that owns it.'
+                  example: 1
+                address:
+                  type: string
+                  description: 'The address of the charging station.'
+                  example: 'St.1, Helsinki, Finland'
+      security: []
+    delete:
+      summary: 'Delete an existing station'
+      operationId: deleteAnExistingStation
+      description: 'This endpoint lets you delete an existing station.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'success{'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": \"Entity successfully deleted.\",\n\"data\": 1,\n\"meta\": []\n}"
+      tags:
+        - Station
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the station.'
+        example: 9
+        required: true
+        schema:
+          type: integer
+  /api/v1/station:
+    post:
+      summary: 'Create a new station'
+      operationId: createANewStation
+      description: 'This endpoint lets you create a new station.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "scenario success={\n\"status\": \"success\",\n\"status_code\": 201,\n\"message\": \"Entity successfully created.\",\n\"data\": {\n\"name\": \"VirtaLTD\",\n\"latitude\": \"45.123213\",\n\"longitude\": \"14.000\",\n\"company_id\": 25,\n\"address\": \"Helsinki,Finland\",\n\"updated_at\": \"2023-03-28T09:50:22.000000Z\",\n\"created_at\": \"2023-03-28T09:50:22.000000Z\",\n\"id\": 29\n},\n\"meta\": []\n}"
+        404:
+          description: 'company not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Company not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Company not found'
+      tags:
+        - Station
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the company.'
+                  example: ChargingSpot1
+                latitude:
+                  type: string
+                  description: 'The latitude of the location.'
+                  example: '+45.01231'
+                longitude:
+                  type: string
+                  description: 'The longitude of the location.'
+                  example: '-121.113122'
+                company_id:
+                  type: integer
+                  description: 'The id of the company that owns it.'
+                  example: 1
+                address:
+                  type: string
+                  description: 'The address of the charging station.'
+                  example: 'St.1, Helsinki, Finland'
+              required:
+                - name
+                - latitude
+                - longitude
+                - company_id
+                - address
+      security: []
+  /api/v1/stations/radius:
+    get:
+      summary: 'Get stations within radius'
+      operationId: getStationsWithinRadius
+      description: 'This endpoint lets you get stations within a radius.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'success{'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "\"status\": \"success\",\n\"status_code\": 200,\n\"message\": null,\n\"data\": {\n\"45.123213,14\": [\n{\n\"id\": 28,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14,\n\"company_id\": 25,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-28 09:09:13\",\n\"updated_at\": \"2023-03-28 09:09:13\",\n\"distance\": 13.700001346387596\n}\n],\n\"45.123213,14.12311\": [\n{\n\"id\": 7,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14.12311,\n\"company_id\": 6,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-27 12:25:12\",\n\"updated_at\": \"2023-03-27 12:25:12\",\n\"distance\": 16.76832087503264\n},\n{\n\"id\": 15,\n\"name\": \"123Test\",\n\"latitude\": 45.123213,\n\"longitude\": 14.12311,\n\"company_id\": 6,\n\"address\": \"TestAddress\",\n\"created_at\": \"2023-03-27 12:27:54\",\n\"updated_at\": \"2023-03-27 12:27:54\",\n\"distance\": 16.76832087503264\n}\n]"
+      tags:
+        - Station
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                radius_km:
+                  type: integer
+                  description: 'The km radius to look in.'
+                  example: 50
+                latitude:
+                  type: string
+                  description: 'The latitude of the location.'
+                  example: '+45.01231'
+                longitude:
+                  type: string
+                  description: 'The longitude of the location.'
+                  example: '-121.113122'
+              required:
+                - radius_km
+                - latitude
+                - longitude
+      security: []
+  /api/v1/status:
+    get:
+      summary: ''
+      operationId: getApiV1Status
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  status_code: 200
+                  message: null
+                  data:
+                    status: up
+                    time: '2023-03-28T09:59:22.788349Z'
+                    services:
+                      database: up
+                  meta: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  status_code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: null
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: up
+                      time:
+                        type: string
+                        example: '2023-03-28T09:59:22.788349Z'
+                      services:
+                        type: object
+                        properties:
+                          database:
+                            type: string
+                            example: up
+                  meta:
+                    type: array
+                    example: []
+      tags:
+        - Status
+      security: []
+tags:
+  -
+    name: Company
+    description: 'Perform CRUD operations for company'
+  -
+    name: Station
+    description: 'Perform CRUD operations for station'
+  -
+    name: Status
+    description: 'See the status of the API'

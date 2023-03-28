@@ -10,8 +10,8 @@ endpoints:
       groupDescription: 'Perform CRUD operations for company'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get a company'
-      description: 'This endpoint lets you get a company.'
+      title: 'Get company info'
+      description: 'This endpoint lets you get a company info.'
       authenticated: false
       custom: []
     headers:
@@ -22,11 +22,11 @@ endpoints:
         name: id
         description: 'The ID of the company.'
         required: true
-        example: 4
+        example: 2
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 4
+      id: 2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -35,14 +35,28 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"id":4,"parent_id":null}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '58'
-          access-control-allow-origin: '*'
-        description: null
+        content: |-
+          {
+          "status": "success",
+          "status_code": 200,
+          "message": null,
+          "data": {
+          "id": 6,
+          "parent_company_id": null,
+          "name": "VirtaLTD",
+          "created_at": "2023-03-27T12:15:47.000000Z",
+          "updated_at": "2023-03-27T12:15:47.000000Z"
+          },
+          "meta": []
+          }
+        headers: []
+        description: success
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Resource not found"}'
+        headers: []
+        description: 'company not found'
         custom: []
     responseFields: []
     auth: []
@@ -71,25 +85,318 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id:
-        name: id
-        description: 'The id of the user.'
+      name:
+        name: name
+        description: 'The name of the company.'
         required: true
-        example: 9
-        type: integer
-        custom: []
-      parent_id:
-        name: parent_id
-        description: 'The id of the parent company.If not provided, will be null.'
-        required: false
-        example: '1'
+        example: VirtaLTD
         type: string
         custom: []
+      parent_company_id:
+        name: parent_company_id
+        description: 'The id of the parent company.If not provided, will be set to null.'
+        required: false
+        example: 1
+        type: integer
+        custom: []
     cleanBodyParameters:
-      id: 9
-      parent_id: '1'
+      name: VirtaLTD
+      parent_company_id: 1
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "status_code": 201,
+          "message": "Entity successfully created.",
+          "data": {
+          "name": "123Test",
+          "parent_company_id": 22,
+          "updated_at": "2023-03-28T07:50:49.000000Z",
+          "created_at": "2023-03-28T07:50:49.000000Z",
+          "id": 27
+          },
+          "meta": []
+          }
+        headers: []
+        description: success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/company/{id}'
+    metadata:
+      groupName: Company
+      groupDescription: 'Perform CRUD operations for company'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update an existing company'
+      description: 'This endpoint lets you update a company.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the company.'
+        required: true
+        example: aut
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: aut
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the company.'
+        required: false
+        example: VirtaUpdated
+        type: string
+        custom: []
+      parent_company_id:
+        name: parent_company_id
+        description: 'id of the parent company or "null".'
+        required: false
+        example: '1'
+        type: The
+        custom: []
+    cleanBodyParameters:
+      name: VirtaUpdated
+      parent_company_id: '1'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "status_code": 200,
+          "message": "Entity successfully created.",
+          "data": {
+          "name": "123Test",
+          "parent_company_id": 22,
+          "updated_at": "2023-03-28T07:50:49.000000Z",
+          "created_at": "2023-03-28T07:50:49.000000Z",
+          "id": 1
+          },
+          "meta": []
+          }
+        headers: []
+        description: success
+        custom: []
+      -
+        status: 400
+        content: '{"message": "Entity not updated successfully."}'
+        headers: []
+        description: 'company not found'
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Parent company could not be set."}'
+        headers: []
+        description: 'parent company not found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/company/{id}'
+    metadata:
+      groupName: Company
+      groupDescription: 'Perform CRUD operations for company'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete an existing company'
+      description: |-
+        This endpoint lets you delete an existing company.
+        Deleting a parent company will also delete all it's children and assigned stations.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the company to be deleted.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "status_code": 200,
+          "message": "Entity successfully deleted.",
+          "data": [],
+          "meta": []
+          }
+        headers: []
+        description: success
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Resource not found."}'
+        headers: []
+        description: 'company not found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/company/{id}/stations/count'
+    metadata:
+      groupName: Company
+      groupDescription: 'Perform CRUD operations for company'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get company stations count'
+      description: 'This endpoint lets you count the stations of a company.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the company.'
+        required: true
+        example: 20
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 20
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "status_code": 200,
+          "message": null,
+          "data": {
+          "stations_count": 2
+          },
+          "meta": []
+          }
+        headers: []
+        description: success
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Resource not found."}'
+        headers: []
+        description: 'company not found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/company/{id}/stations/list'
+    metadata:
+      groupName: Company
+      groupDescription: 'Perform CRUD operations for company'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get company stations list'
+      description: 'This endpoint lets you get a list with stations of the company.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the company.'
+        required: true
+        example: 20
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 20
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": "success",
+          "status_code": 200,
+          "message": null,
+          "data": [
+          {
+          "id": 20,
+          "parent_company_id": 6,
+          "name": "123Test",
+          "created_at": "2023-03-28 06:50:27",
+          "updated_at": "2023-03-28 06:50:27"
+          },
+          {
+          "id": 23,
+          "parent_company_id": 20,
+          "name": "123Test",
+          "created_at": "2023-03-28 06:50:36",
+          "updated_at": "2023-03-28 06:50:36"
+          }
+          ],
+          "meta": []
+        headers: []
+        description: success
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Resource not found."}'
+        headers: []
+        description: 'company not found'
+        custom: []
     responseFields: []
     auth: []
     controller: null

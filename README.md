@@ -19,3 +19,8 @@ All the API endpoints and their usage can be consulted under
     ```
     docker-compose up -d
     ```
+## Scalability
+
+The following architecture should be implemented in cloud to ensure scalability of the app
+
+![plot](storage/app/public/schema.jpeg)
