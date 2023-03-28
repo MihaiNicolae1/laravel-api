@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->double('latitude',10,8)->nullable(false);
-            $table->double('longitude', 10, 8)->nullable(false);
+            $table->double('longitude', 11, 8)->nullable(false);
             $table->foreignId('company_id')
                   ->nullable(false)
                   ->constrained('companies')

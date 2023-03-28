@@ -12,8 +12,8 @@ endpoints:
       groupDescription: 'Perform CRUD operations for company'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get a company'
-      description: 'This endpoint lets you get a company.'
+      title: 'Get company info'
+      description: 'This endpoint lets you get a company info.'
       authenticated: false
       custom: []
     headers:
@@ -24,11 +24,11 @@ endpoints:
         name: id
         description: 'The ID of the company.'
         required: true
-        example: 4
+        example: 10
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 4
+      id: 10
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -36,8 +36,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"id":4,"parent_id":null}'
+        status: 404
+        content: '{"status":"error","status_code":404,"message":"Resource not found","errors":[],"meta":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -73,23 +73,63 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id:
-        name: id
-        description: 'The id of the user.'
+      name:
+        name: name
+        description: 'The name of the company.'
         required: true
-        example: 9
-        type: integer
-        custom: []
-      parent_id:
-        name: parent_id
-        description: 'The id of the parent company.If not provided, will be null.'
-        required: false
-        example: '1'
+        example: VirtaLTD
         type: string
         custom: []
+      parent_company_id:
+        name: parent_company_id
+        description: 'The id of the parent company.If not provided, will be null.'
+        required: false
+        example: 1
+        type: integer
+        custom: []
     cleanBodyParameters:
-      id: 9
-      parent_id: '1'
+      name: VirtaLTD
+      parent_company_id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/company/{id}'
+    metadata:
+      groupName: Company
+      groupDescription: 'Perform CRUD operations for company'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete an existing company'
+      description: |-
+        This endpoint lets you delete an existing company.
+        Deleting a parent company will also delete all it's children and their stations.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the company to be deleted.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []

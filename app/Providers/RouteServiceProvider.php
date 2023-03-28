@@ -52,9 +52,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->apiNamespace . '\V2')
                 ->group(base_path('routes/api_v2.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
         });
     }
 
