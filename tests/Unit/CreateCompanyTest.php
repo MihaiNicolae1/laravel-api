@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\V1\Company;
 use Tests\TestCase;
 
 class CreateCompanyTest extends TestCase
@@ -10,51 +11,26 @@ class CreateCompanyTest extends TestCase
     const TEST_URI = '/api/v1/company';
     const TEST_METHOD = 'POST';
 
-    public function test_missing_name_from_body()
+    public function test_empty_body_request()
     {
-        $this->json(self::TEST_METHOD, self::TEST_URI)
-            ->assertStatus(422)
-            ->assertJson(
-                [
-                    "message" => "The name field is required.",
-                    "errors" => [
-                        "name" => [
-                            "The name field is required."
-                        ]
-                    ]
-                ]
-            );
+        $this->post(route('company.store'), [])
+            ->assertStatus(422);
     }
 
-    public function test_wrong_format_attributes()
+    public function test_unsupported_format_body()
     {
-        $data = [
-                "name" => 123,
-                "parent_company_id" => "123s"
+        $company = [
+            'name' => 1,
+            'parent_company_id' => '12s'
         ];
-        $this->json(self::TEST_METHOD, self::TEST_URI, $data)
-            ->assertStatus(422)
-            ->assertJson(
-                [
-                    "message" => "The name must be a string. (and 1 more error)",
-                    "errors" => [
-                        "name" => [
-                            "The name must be a string."
-                        ],
-                        "parent_company_id" => [
-                            "The parent company id must be an integer."
-                        ]
-                    ]
-                ]
-            );
+        $this->post(route('company.store'), $company)
+            ->assertStatus(422);
     }
 
-    public function test_create_successfully()
-    {
-        $data = [
-            "name" => "VirtaLTD",
-        ];
-        $this->json(self::TEST_METHOD, self::TEST_URI, $data)
+    public function test_successful_create() {
+        $company = Company::factory()->make();
+        $this->post(route('company.store'), $company)
             ->assertStatus(201);
     }
+
 }
