@@ -16,6 +16,9 @@ Route::controller(CompanyController::class)->group(function () {
     Route::post('/company', 'store');
     Route::patch('/company/{id}', 'update');
     Route::delete('/company/{id}', 'destroy');
+    Route::get('/company/{id}/stations/count', 'getStationsCount');
+    Route::get('/company/{id}/stations/list', 'getStationsList');
+
 });
 
 Route::controller(StationController::class)->group(function () {
@@ -23,4 +26,5 @@ Route::controller(StationController::class)->group(function () {
     Route::post('/station', 'store');
     Route::patch('/station/{id}', 'update');
     Route::delete('/station/{id}', 'destroy');
+    Route::get('/stations/radius', 'getStationsInRadius');
 });
