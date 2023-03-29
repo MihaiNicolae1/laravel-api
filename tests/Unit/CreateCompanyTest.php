@@ -29,7 +29,6 @@ class CreateCompanyTest extends TestCase
         $this->post(route('company.store'), $company)
             ->assertStatus(201);
         $this->assertDatabaseHas('companies', $company);
-        $companyCreated = Company::find();
     }
 
 

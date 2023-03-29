@@ -39,15 +39,10 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
-COPY ./init.sh /tmp
-RUN ["chmod", "+x", "/tmp/init.sh"]
-
 # Change current user to www
 USER www
 
 CMD bash -c "composer install && composer update"
-
-ENTRYPOINT ["/tmp/init.sh"]
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
