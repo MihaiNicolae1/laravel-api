@@ -8,9 +8,6 @@ use Tests\TestCase;
 class CreateCompanyTest extends TestCase
 {
 
-    const TEST_URI = '/api/v1/company';
-    const TEST_METHOD = 'POST';
-
     public function test_empty_body_request()
     {
         $this->post(route('company.store'), [])
@@ -28,9 +25,12 @@ class CreateCompanyTest extends TestCase
     }
 
     public function test_successful_create() {
-        $company = Company::factory()->make();
+        $company = Company::factory()->make()->toArray();
         $this->post(route('company.store'), $company)
             ->assertStatus(201);
+        $this->assertDatabaseHas('companies', $company);
+        $companyCreated = Company::find();
     }
+
 
 }
