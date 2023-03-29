@@ -10,6 +10,13 @@ class Station extends Model
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'stations';
+
     protected $fillable = ['name', 'latitude', 'longitude', 'company_id', 'address'];
 
 
