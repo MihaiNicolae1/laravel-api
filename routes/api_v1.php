@@ -12,12 +12,12 @@ Route::controller(StatusController::class)->group(function () {
 
 
 Route::controller(CompanyController::class)->group(function () {
-    Route::get('/company/{id}', 'get');
-    Route::post('/company', 'store');
-    Route::patch('/company/{id}', 'update');
-    Route::delete('/company/{id}', 'destroy');
-    Route::get('/company/{id}/stations/count', 'getStationsCount');
-    Route::get('/company/{id}/stations/list', 'getStationsList');
+    Route::get('/company/{id}', 'get')->name('company.get');
+    Route::post('/company', 'store')->name('company.store');
+    Route::patch('/company/{id}', 'update')->name('company.update');
+    Route::delete('/company/{id}', 'destroy')->name('company.delete');
+    Route::get('/company/{id}/stations/count', 'getStationsCount')->name('company.station.count');
+    Route::get('/company/{id}/stations/list', 'getStationsList')->name('company.station.list');
 
 });
 
