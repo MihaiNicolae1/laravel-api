@@ -19,6 +19,15 @@ All the API endpoints and their usage can be consulted under
     ```
     docker-compose up -d
     ```
+- after the containers are created, run from the terminal to enter app's terminal
+    ```
+    docker exec -ti app bash
+    ```
+- in app's terminal, you can run the migrations and test commands:  
+    ```
+    php artisan migrate
+    php artisan test
+    ```
 ## Scalability
 
 The following architecture should be implemented in cloud to ensure scalability of the app
